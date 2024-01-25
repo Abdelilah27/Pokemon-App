@@ -24,9 +24,17 @@ e
 5app/src/main/java/com/ibm/pokemonapp/ui/theme/Type.kt,d/5/d500dc0479a9df94ff5b3367dec1d83654f08dea
 S
 #.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
-F
-app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
 X
 (gradle/wrapper/gradle-wrapper.properties,f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
+f
+6app/src/main/java/com/ibm/pokemonapp/ui/theme/Theme.kt,1/3/13e70361aaf960742db1bec8ba5a1559a9144e3b
+
+Oapp/src/main/java/com/ibm/pokemonapp/presentation/core/di/PokemonApplication.kt,f/b/fb7c41d94a2560c39a4939821fdf3009281ec81a
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+F
+app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
+@
+build.gradle.kts,d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d

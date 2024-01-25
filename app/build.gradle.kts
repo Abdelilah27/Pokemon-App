@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id ("kotlin-parcelize")
 }
 
 android {
@@ -65,7 +66,6 @@ dependencies {
     val timberVersion = "4.7.1"
     val coroutinesVersion = "1.7.1"
     val daggerHiltVersion = "2.50"
-    val hiltLifecycleViewModelVersion = "1.0.0-alpha03"
     val hiltNavigationComposeVersion = "1.1.0"
     val coilVersion = "1.1.1"
     val accompanistCoilVersion = "0.7.0"
@@ -90,6 +90,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
+    implementation ("com.squareup.retrofit2:converter-scalars:${retrofitVersion}") // TODO
 
     // Timber
     implementation("com.jakewharton.timber:timber:$timberVersion")

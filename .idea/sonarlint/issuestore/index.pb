@@ -22,11 +22,19 @@ A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
 ;
 gradlew.bat,2/a/2a45a911a8f1836b0b6c5b758962572012d8f8c3
-F
-app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
 X
 (gradle/wrapper/gradle-wrapper.properties,f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
 7
 gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
+f
+6app/src/main/java/com/ibm/pokemonapp/ui/theme/Theme.kt,1/3/13e70361aaf960742db1bec8ba5a1559a9144e3b
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+F
+app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
+
+Oapp/src/main/java/com/ibm/pokemonapp/presentation/core/di/PokemonApplication.kt,f/b/fb7c41d94a2560c39a4939821fdf3009281ec81a
+@
+build.gradle.kts,d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d

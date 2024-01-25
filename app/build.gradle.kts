@@ -64,7 +64,7 @@ dependencies {
     val okHttpVersion = "4.10.0"
     val timberVersion = "4.7.1"
     val coroutinesVersion = "1.7.1"
-    val daggerHiltVersion = "2.40.1"
+    val daggerHiltVersion = "2.50"
     val hiltLifecycleViewModelVersion = "1.0.0-alpha03"
     val hiltNavigationComposeVersion = "1.1.0"
     val coilVersion = "1.1.1"
@@ -104,8 +104,7 @@ dependencies {
 
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:2.33-beta")
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleViewModelVersion")
+    kapt("com.google.dagger:hilt-compiler:2.50")
     kapt("androidx.hilt:hilt-compiler:$hiltNavigationComposeVersion")
     implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
 
@@ -114,4 +113,8 @@ dependencies {
     implementation("com.google.accompanist:accompanist-coil:$accompanistCoilVersion")
 
 
+}
+
+kapt {
+    correctErrorTypes = true
 }

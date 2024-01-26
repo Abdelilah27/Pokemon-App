@@ -53,6 +53,7 @@ android {
 }
 
 dependencies {
+    implementation("junit:junit:4.12")
     // TODO
     // Define versions
     val coreKtxVersion = "1.12.0"
@@ -64,12 +65,12 @@ dependencies {
     val retrofitVersion = "2.9.0"
     val okHttpVersion = "4.10.0"
     val timberVersion = "4.7.1"
-    val coroutinesVersion = "1.7.1"
+    val coroutinesVersion = "1.7.3"
     val daggerHiltVersion = "2.50"
     val hiltNavigationComposeVersion = "1.1.0"
     val coilVersion = "2.5.0"
-    val accompanistCoilVersion = "0.7.0"
     val paletteVersion = "1.0.0"
+    val mockkVersion = "1.12.3"
 
     implementation("androidx.core:core-ktx:$coreKtxVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
@@ -103,6 +104,8 @@ dependencies {
     // Coroutine Lifecycle Scopes
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesVersion}")
+
 
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
@@ -111,10 +114,11 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
 
     // Coil // TODO
-    implementation("io.coil-kt:coil-compose:$coilVersion")    // implementation("com.google.accompanist:accompanist-coil:$accompanistCoilVersion")
+    implementation("io.coil-kt:coil-compose:$coilVersion")
 
     implementation("androidx.palette:palette-ktx:$paletteVersion") // TODO
 
+    testImplementation("io.mockk:mockk:${mockkVersion}")
 
 }
 

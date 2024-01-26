@@ -26,6 +26,7 @@ import javax.net.ssl.X509TrustManager
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
+    // TODO
     @Provides
     fun providesOkHttpClientBuilder(): OkHttpClient.Builder = OkHttpClient.Builder()
 
@@ -43,11 +44,7 @@ class NetworkModule {
         okHttpClientBuilder: OkHttpClient.Builder,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
-
-
         okHttpClientBuilder.addInterceptor(httpLoggingInterceptor)
-
-
         val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
             object : X509TrustManager {
                 override fun checkClientTrusted(

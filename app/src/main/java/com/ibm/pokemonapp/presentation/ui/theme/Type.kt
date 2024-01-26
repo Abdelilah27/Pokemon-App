@@ -1,4 +1,4 @@
-package com.ibm.pokemonapp.ui.theme
+package com.ibm.pokemonapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

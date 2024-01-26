@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class PokemonRepositoryImp @Inject constructor(private var apiService: ApiService) :
     PokemonRepository {
+
     override suspend fun getPokemonList(params: Pair<Int, Int>): Resource<PokemonListResponse> {
         try {
             return when (val response = apiService.getPokemonList(params.first, params.second)) {
@@ -18,22 +19,21 @@ class PokemonRepositoryImp @Inject constructor(private var apiService: ApiServic
                 }
 
                 is NetworkResponse.ApiError -> {
-                    Resource.Error(response.code, response.body.message)
+                    Resource.Error(response.code, "Failed to fetch Pokémon list")
                 }
 
                 is NetworkResponse.NetworkError -> {
-                    Resource.Error(2000, "${response.error}")
+                    Resource.Error(2000, "Network error")
                 }
 
                 else -> {
-                    Resource.Error(1000, "$response")
+                    Resource.Error(1000, "Unexpected error during Pokémon list retrieval")
                 }
             }
         } catch (e: Exception) {
-            return Resource.Error(500, "An unexpected error occurred: ${e.message}")
+            return Resource.Error(500, "Unexpected error")
         }
     }
-
 
     override suspend fun getPokemonDetails(pokemonName: String): Resource<PokemonResponse> {
         try {
@@ -43,19 +43,25 @@ class PokemonRepositoryImp @Inject constructor(private var apiService: ApiServic
                 }
 
                 is NetworkResponse.ApiError -> {
-                    Resource.Error(response.code, response.body.message)
+                    Resource.Error(
+                        response.code,
+                        "Failed to fetch Pokémon details"
+                    )
                 }
 
                 is NetworkResponse.NetworkError -> {
-                    Resource.Error(2000, "${response.error}")
+                    Resource.Error(2000, "Network error")
                 }
 
                 else -> {
-                    Resource.Error(1000, "$response")
+                    Resource.Error(
+                        1000,
+                        "Unexpected error during Pokémon details retrieval"
+                    )
                 }
             }
         } catch (e: Exception) {
-            return Resource.Error(500, "An unexpected error occurred: ${e.message}")
+            return Resource.Error(500, "Unexpected error")
         }
     }
 }

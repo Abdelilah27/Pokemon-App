@@ -32,22 +32,12 @@ f
 6app/src/main/java/com/ibm/pokemonapp/ui/theme/Theme.kt,1/3/13e70361aaf960742db1bec8ba5a1559a9144e3b
 
 Oapp/src/main/java/com/ibm/pokemonapp/presentation/core/di/PokemonApplication.kt,f/b/fb7c41d94a2560c39a4939821fdf3009281ec81a
-P
- app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
-@
-build.gradle.kts,d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d
 {
 Kapp/src/main/java/com/ibm/pokemonapp/domain/repository/PokemonRepository.kt,c/5/c58526284293afad301e829ece829c41457291a7
 }
 Mapp/src/main/java/com/ibm/pokemonapp/presentation/core/di/module/AppModule.kt,2/3/2349c4c13530eeaae99665bea91f902170b06763
-|
-Lapp/src/main/java/com/ibm/pokemonapp/data/repository/PokemonRepositoryImp.kt,d/c/dc227d5ff40c0dae3f2a5ae6ce629537db465753
-}
-Mapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/Response.kt,d/9/d942df8df22903d4fc55bc5a5848f8de46b04662
-à
-Xapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/PokemonListResponse.kt,3/6/360a7db0b8c871566ea5f1a39dfec930d0d6ffec
 à
 Xapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/NetworkResponseCall.kt,b/4/b40c2e06b0c29965b6bcc5cc686d17e2e5fd57e7
 Ñ
@@ -76,8 +66,6 @@ Oapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Gold.kt
 Sapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Versions.kt,e/7/e759990e5d98e92afa0db15a2fb40f336912062f
 ç
 ]app/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/VersionGroupDetail.kt,f/3/f38ba5ce25007b19b1543e110285e241cd9691cd
-Å
-Qapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Result.kt,7/0/70c08db0de94ab0394c736fb1cd15a9b2a2eb044
 à
 Xapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/GenerationVii.kt,a/1/a114fa28aef67778e8c5bd755dd0afee19176570
 Ö
@@ -86,8 +74,6 @@ Uapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/BlackWh
 Wapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/GenerationVi.kt,4/3/43a5af62377269b0fe6ee0de0cb641771518d477
 Ç
 Rapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/RedBlue.kt,e/3/e3609e909c4ea7a61dab9b16a6ef8d89d6ff0a0f
-D
-app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
 }
 Mapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/XY.kt,1/6/161e498562883803466f21fb22abb45140e56052
 ä
@@ -158,14 +144,10 @@ Papp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/MoveX.k
 Rapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Version.kt,4/1/41295eed268086144599af3dd6c3832a0702f8dc
 Ä
 Papp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Icons.kt,c/7/c78254aeb6bf9053724d2e97f621f42fb18f6588
-d
-4app/src/main/java/com/ibm/pokemonapp/utils/Consts.kt,3/4/344a2b26389dec8e9dad8617c0314c45054d0509
 t
 Dapp/src/main/java/com/ibm/pokemonapp/domain/core/di/UseCaseModule.kt,0/4/043a5edd80ea41f2d88c4c036bfcc9d5e83225ea
 m
 =app/src/main/java/com/ibm/pokemonapp/domain/model/Resource.kt,8/b/8b1cf53ac49e8fd8307013a74a2394e47d47c82e
-Ä
-Papp/src/main/java/com/ibm/pokemonapp/domain/usecase/GetPokemonListUseCaseImpl.kt,3/1/31b183995e4e2168769439d09f5154a00fc9e37d
 É
 Sapp/src/main/java/com/ibm/pokemonapp/domain/usecase/GetPokemonDetailsUseCaseImpl.kt,e/e/ee07d4409cefa92881c022a9de4024ae33493320
 Å
@@ -174,8 +156,6 @@ Qapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/IconsX.
 Oapp/src/main/java/com/ibm/pokemonapp/domain/usecase/GetPokemonDetailsUseCase.kt,6/e/6ea5c9dd1d9dc3c71738ab67528ed575e210c0cb
 |
 Lapp/src/main/java/com/ibm/pokemonapp/domain/usecase/GetPokemonListUseCase.kt,a/3/a3593529ca8f2331017bab90d5fe9bd402fc8b58
-w
-Gapp/src/main/java/com/ibm/pokemonapp/domain/usecase/base/BaseUseCase.kt,2/f/2f0aad4368b7afcbd77a751f3491300a43dc3644
 Ä
 Papp/src/main/java/com/ibm/pokemonapp/data/core/adapter/NetworkResponseAdapter.kt,e/f/ef15a7303bccede3edeedeaf9d81afe9ae95ff8c
 á

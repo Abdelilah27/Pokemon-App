@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id ("kotlin-parcelize")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -67,8 +67,9 @@ dependencies {
     val coroutinesVersion = "1.7.1"
     val daggerHiltVersion = "2.50"
     val hiltNavigationComposeVersion = "1.1.0"
-    val coilVersion = "1.1.1"
+    val coilVersion = "2.5.0"
     val accompanistCoilVersion = "0.7.0"
+    val paletteVersion = "1.0.0"
 
     implementation("androidx.core:core-ktx:$coreKtxVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
@@ -90,7 +91,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
-    implementation ("com.squareup.retrofit2:converter-scalars:${retrofitVersion}") // TODO
+    implementation("com.squareup.retrofit2:converter-scalars:${retrofitVersion}") // TODO
 
     // Timber
     implementation("com.jakewharton.timber:timber:$timberVersion")
@@ -110,8 +111,9 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
 
     // Coil // TODO
-    implementation("io.coil-kt:coil:$coilVersion")
-    implementation("com.google.accompanist:accompanist-coil:$accompanistCoilVersion")
+    implementation("io.coil-kt:coil-compose:$coilVersion")    // implementation("com.google.accompanist:accompanist-coil:$accompanistCoilVersion")
+
+    implementation("androidx.palette:palette-ktx:$paletteVersion") // TODO
 
 
 }

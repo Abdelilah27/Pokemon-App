@@ -90,13 +90,10 @@ fun PokemonListScreen(
                     .fillMaxWidth()
                     .align(CenterHorizontally)
             )
-
             Text(
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(
-                            UIText.StringResource(R.string.welcome_title, emptyList()).asString()
-                        )
+                        append(stringResource(R.string.welcome_title))
                     }
                     append("\n")
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
@@ -216,7 +213,7 @@ fun PokemonList(
             pokemonList.size / 2 + 1 // 14.2
         }
         items(itemCount) { currentIndex ->
-            if (currentIndex >= itemCount - 1 && !isEndReached) { // Check if we're at the bottom
+            if (currentIndex >= itemCount - 1 && !isEndReached && !isLoading) { // Check if we're at the bottom
                 viewModel.getPokemonList()
             }
             PokemonRow(

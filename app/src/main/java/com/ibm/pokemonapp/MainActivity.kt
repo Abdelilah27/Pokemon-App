@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.ibm.pokemonapp.presentation.ui.pokemonDetails.PokemonDetailsScreen
 import com.ibm.pokemonapp.presentation.ui.pokemonList.PokemonListScreen
 import com.ibm.pokemonapp.presentation.ui.theme.PokemonAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +43,7 @@ class MainActivity : ComponentActivity() {
                         val pokemonName = remember {
                             it.arguments?.getString("pokemonName")
                         }
+                        PokemonDetailsScreen(navController = navController, pokemonColor, pokemonName)
                     }
                 }
             }

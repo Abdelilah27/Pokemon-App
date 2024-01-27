@@ -5,6 +5,12 @@
     <string name="welcome_title_">Looking For?</string>
     <string name="retry">Retry</string>
 
+
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="category">Category</string>
+    <string name="skills">Skills</string>
+
     <!-- Error Massage -->
     <string name="failed_to_fetch">Failed to fetch Pokémon list</string>
     <string name="network_error">Network error</string>

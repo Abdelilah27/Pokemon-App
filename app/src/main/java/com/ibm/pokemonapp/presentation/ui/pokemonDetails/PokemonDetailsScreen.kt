@@ -1,6 +1,5 @@
 package com.ibm.pokemonapp.presentation.ui.pokemonDetails
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,87 +11,86 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.SubcomposeAsyncImage
+import coil.decode.SvgDecoder
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import com.ibm.pokemonapp.R
+import com.ibm.pokemonapp.data.source.network.response.PokemonResponse
+import com.ibm.pokemonapp.domain.model.Resource
 import com.ibm.pokemonapp.presentation.ui.theme.Blue
 import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
+import com.ibm.pokemonapp.utils.Consts.DREAM_WORLD_IMAGES_URL
 import com.ibm.pokemonapp.utils.InfoPair
+import kotlinx.coroutines.flow.first
 
 @Composable
 fun PokemonDetailsScreen(
     navController: NavController,
     pokemonColor: Color,
     pokemonName: String?,
+    viewModel: PokemonDetailsViewModel = hiltViewModel()
 ) {
-    Surface(
-        color = pokemonColor,
-        modifier = Modifier.fillMaxSize()
+
+    val pokemonDetails by produceState(
+        initialValue = Resource.Loading(),
+        key1 = viewModel,
+        key2 = pokemonName
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
+        value = pokemonName?.let { viewModel.getPokemonDetails(it.toLowerCase()).first() }!!
+    }
+
+    Column(
+        modifier = Modifier
+            .background(pokemonColor)
+    )
+    {
+        TopBar(navController = navController)
+        Box(
+            modifier = Modifier.fillMaxSize()
         ) {
-            TopBar(navController = navController)
-            PokemonNameAndNumber(pokemonName = pokemonName)
-            PokemonTypesRow()
-            PokemonImage()
-            Divider()
-
-            PokemonInfoRow(
-                InfoPair(
-                    iconRes = R.drawable.baseline_spoke_24,
-                    titleRes = R.string.weight,
-                    value = "90,5 Kg"
-                ),
-                InfoPair(
-                    iconRes = R.drawable.baseline_height_24,
-                    titleRes = R.string.height,
-                    value = "1,8 m"
-                ),
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth()
+            PokemonDetailState(
+                pokemonDetails = pokemonDetails,
+                imageModifier = Modifier
+                    .size(200.dp)
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                modifier = Modifier.fillMaxWidth(),
+                loadingModifier = Modifier
+                    .size(64.dp)
+                    .padding(16.dp)
+                    .align(Alignment.Center),
+                textModifier = Modifier.align(Alignment.Center)
             )
-
-            PokemonInfoRow(
-                InfoPair(
-                    iconRes = R.drawable.baseline_category_24,
-                    titleRes = R.string.category,
-                    value = "Blame"
-                ),
-                InfoPair(
-                    iconRes = R.drawable.baseline_catching_pokemon_24,
-                    titleRes = R.string.skills,
-                    value = "Flame"
-                ),
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth()
-            )
-
-            GenderProgressBar(genderPercentage = 0.8f)
-
         }
     }
 }
@@ -129,7 +127,7 @@ fun TopBar(navController: NavController) {
 }
 
 @Composable
-fun PokemonNameAndNumber(pokemonName: String?) {
+fun PokemonNameAndNumber(pokemonName: String?, pokemonNumber: Int) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -144,7 +142,7 @@ fun PokemonNameAndNumber(pokemonName: String?) {
             color = MaterialTheme.colorScheme.secondary,
         )
         Text(
-            text = "001" ?: "N/A",
+            text = "No: $pokemonNumber",
             fontFamily = Roboto,
             fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp,
@@ -156,7 +154,7 @@ fun PokemonNameAndNumber(pokemonName: String?) {
 }
 
 @Composable
-fun PokemonTypesRow() {
+fun PokemonTypesRow(pokemonDetails: PokemonResponse) {
     Row(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
@@ -170,7 +168,7 @@ fun PokemonTypesRow() {
                 )
         ) {
             Text(
-                text = "Grass" ?: "N/A",
+                text = pokemonDetails.types.getOrNull(0)?.type?.name ?: "N/A",
                 fontFamily = Roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
@@ -188,7 +186,7 @@ fun PokemonTypesRow() {
                 )
         ) {
             Text(
-                text = "Poison" ?: "N/A",
+                text = pokemonDetails.types.getOrNull(1)?.type?.name ?: "N/A",
                 fontFamily = Roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
@@ -201,13 +199,29 @@ fun PokemonTypesRow() {
 }
 
 @Composable
-fun PokemonImage() {
-    Image(
-        painter = painterResource(id = R.drawable.pokmon_one),
-        contentDescription = "Pokemon logo",
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+fun PokemonImage(pokemonDetails: PokemonResponse, modifier: Modifier) {
+    val imageUrl = "$DREAM_WORLD_IMAGES_URL${pokemonDetails.id}.svg"
+    val placeholderImage = R.drawable.ic_pokemon_logo
+    val imageRequest = ImageRequest.Builder(LocalContext.current)
+        .data(imageUrl)
+        .memoryCacheKey(imageUrl)
+        .diskCacheKey(imageUrl)
+        .error(placeholderImage)
+        .decoderFactory(SvgDecoder.Factory())
+        .diskCachePolicy(CachePolicy.ENABLED)
+        .memoryCachePolicy(CachePolicy.ENABLED)
+        .build()
+    SubcomposeAsyncImage(
+        model = imageRequest,
+        modifier = modifier,
+        contentDescription = "Pokemon Image",
+        loading = {
+            CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier.scale(0.5f)
+            )
+        },
+        onSuccess = {}
     )
 }
 
@@ -219,6 +233,40 @@ fun Divider() {
             .height(1.dp)
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(24.dp))
+    )
+}
+
+@Composable
+private fun PokemonSkillsData(
+    modifier: Modifier,
+    pokemonDetails: PokemonResponse
+) {
+    PokemonInfoRow(
+        InfoPair(
+            iconRes = R.drawable.baseline_spoke_24,
+            titleRes = R.string.weight,
+            value = "${pokemonDetails.weight} Kg"
+        ),
+        InfoPair(
+            iconRes = R.drawable.baseline_height_24,
+            titleRes = R.string.height,
+            value = "${pokemonDetails.height} M"
+        ),
+        modifier = modifier
+    )
+
+    PokemonInfoRow(
+        InfoPair(
+            iconRes = R.drawable.baseline_category_24,
+            titleRes = R.string.category,
+            value = pokemonDetails.abilities.getOrNull(0)?.ability?.name ?: "N/A",
+        ),
+        InfoPair(
+            iconRes = R.drawable.baseline_catching_pokemon_24,
+            titleRes = R.string.skills,
+            value = pokemonDetails.abilities.getOrNull(1)?.ability?.name ?: "N/A",
+        ),
+        modifier = modifier
     )
 }
 
@@ -281,14 +329,16 @@ fun PokemonInfoPair(infoPair: InfoPair, modifier: Modifier) {
 }
 
 @Composable
-fun GenderProgressBar(genderPercentage: Float) {
+fun GenderProgressBar(
+    pokemonDetails: PokemonResponse
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         LinearProgressIndicator(
-            progress = genderPercentage,
+            progress = 0.6f,
             color = Blue,
             trackColor = Red,
             modifier = Modifier
@@ -319,6 +369,50 @@ fun GenderProgressBar(genderPercentage: Float) {
     }
 }
 
+@Composable
+fun PokemonDetailState(
+    pokemonDetails: Resource<PokemonResponse>,
+    modifier: Modifier = Modifier,
+    imageModifier: Modifier = Modifier,
+    loadingModifier: Modifier = Modifier,
+    textModifier: Modifier = Modifier,
+) {
+    when (pokemonDetails) {
+        is Resource.Success -> {
+            val pokemonData = pokemonDetails.data
+            Column {
+                pokemonData?.let { pokemon ->
+                    PokemonNameAndNumber(
+                        pokemonName = pokemonDetails.data.name,
+                        pokemon.id
+                    )
+                    PokemonTypesRow(pokemon)
+                    PokemonImage(
+                        pokemonDetails.data,
+                        imageModifier.align(Alignment.CenterHorizontally)
+                    )
+                    Divider()
+                    PokemonSkillsData(modifier = modifier.weight(1f), pokemonDetails = pokemon)
+                    GenderProgressBar(pokemon)
+                }
+            }
+        }
 
+        is Resource.Error -> {
+            Text(
+                text = pokemonDetails.message!!,
+                color = Red,
+                modifier = textModifier
+            )
+        }
+
+        is Resource.Loading -> {
+            CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.primary,
+                modifier = loadingModifier
+            )
+        }
+    }
+}
 
 

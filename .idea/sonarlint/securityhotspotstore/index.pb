@@ -146,8 +146,6 @@ Rapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Version
 Papp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Icons.kt,c/7/c78254aeb6bf9053724d2e97f621f42fb18f6588
 t
 Dapp/src/main/java/com/ibm/pokemonapp/domain/core/di/UseCaseModule.kt,0/4/043a5edd80ea41f2d88c4c036bfcc9d5e83225ea
-m
-=app/src/main/java/com/ibm/pokemonapp/domain/model/Resource.kt,8/b/8b1cf53ac49e8fd8307013a74a2394e47d47c82e
 É
 Sapp/src/main/java/com/ibm/pokemonapp/domain/usecase/GetPokemonDetailsUseCaseImpl.kt,e/e/ee07d4409cefa92881c022a9de4024ae33493320
 Å

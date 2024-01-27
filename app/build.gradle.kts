@@ -115,6 +115,7 @@ dependencies {
 
     // Coil // TODO
     implementation("io.coil-kt:coil-compose:$coilVersion")
+    implementation("io.coil-kt:coil-svg:$coilVersion")
 
     implementation("androidx.palette:palette-ktx:$paletteVersion") // TODO
 

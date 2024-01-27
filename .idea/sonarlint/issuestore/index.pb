@@ -144,8 +144,6 @@ Mapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/XY.kt,
 Qapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Yellow.kt,2/0/202222de5b169223b9895a2148dc04e4dff02e7b
 t
 Dapp/src/main/java/com/ibm/pokemonapp/domain/core/di/UseCaseModule.kt,0/4/043a5edd80ea41f2d88c4c036bfcc9d5e83225ea
-m
-=app/src/main/java/com/ibm/pokemonapp/domain/model/Resource.kt,8/b/8b1cf53ac49e8fd8307013a74a2394e47d47c82e
 {
 Kapp/src/main/java/com/ibm/pokemonapp/domain/repository/PokemonRepository.kt,c/5/c58526284293afad301e829ece829c41457291a7
 

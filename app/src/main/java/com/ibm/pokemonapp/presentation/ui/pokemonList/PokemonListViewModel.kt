@@ -13,6 +13,7 @@ import com.ibm.pokemonapp.data.source.network.response.PokemonListResponse
 import com.ibm.pokemonapp.data.source.network.response.Response
 import com.ibm.pokemonapp.domain.model.Resource
 import com.ibm.pokemonapp.domain.usecase.GetPokemonListUseCase
+import com.ibm.pokemonapp.utils.Consts.DREAM_WORLD_IMAGES_URL
 import com.ibm.pokemonapp.utils.Consts.PAGE_SIZE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -73,7 +74,7 @@ class PokemonListViewModel @Inject constructor(
                 isLoading.value = false
                 workflowError.value =
                     Response.ErrorResponse(
-                        message = "An error occurred",
+                        message = "An error occurred",// TODO
                         id = 999
                     )
             }
@@ -88,7 +89,7 @@ class PokemonListViewModel @Inject constructor(
                 entry.url.takeLastWhile { it.isDigit() }
             }
             val url =
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${number}.png"
+                "$DREAM_WORLD_IMAGES_URL${number}.svg"
             PokemonListEntry(
                 entry.name.capitalize(Locale.ROOT),
                 url,

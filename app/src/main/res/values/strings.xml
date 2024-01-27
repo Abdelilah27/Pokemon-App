@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Pokemon App</string>
+    <string name="search_hint">Search…</string>
+    <string name="welcome_title">What Are You</string>
+    <string name="welcome_title_">Looking For?</string>
+    <string name="retry">Retry</string>
+
+    <!-- Error Massage -->
+    <string name="failed_to_fetch">Failed to fetch Pokémon list</string>
+    <string name="network_error">Network error</string>
+    <string name="unexpected_during_retrieval">Unexpected error during Pokémon list retrieval</string>
+    <string name="unexpected_error">Unexpected error</string>
+
+    <string name="failed_to_fetch_details">Failed to fetch Pokémon details</string>
+    <string name="unexpected_during_retrieval_details">Unexpected error during Pokémon details retrieval</string>
+
+    <string name="error_occurred">"An error occurred"</string>
+
+
 </resources>

@@ -50,6 +50,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -61,6 +62,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
+import coil.decode.SvgDecoder
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.ibm.pokemonapp.R
@@ -68,6 +70,7 @@ import com.ibm.pokemonapp.data.models.PokemonListEntry
 import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
 import com.ibm.pokemonapp.presentation.ui.theme.RobotoCondensed
+import com.ibm.pokemonapp.utils.UIText
 
 
 @Composable
@@ -91,11 +94,13 @@ fun PokemonListScreen(
             Text(
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append("What Are You")
+                        append(
+                            UIText.StringResource(R.string.welcome_title, emptyList()).asString()
+                        )
                     }
                     append("\n")
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append("Looking For?")
+                        append(stringResource(R.string.welcome_title_))
                     }
                 },
                 fontFamily = Roboto,
@@ -111,7 +116,7 @@ fun PokemonListScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                hint = "Search ...",
+                hint = stringResource(R.string.search_hint),
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -270,6 +275,7 @@ fun PokemonListEntry(
                 .memoryCacheKey(imageUrl)
                 .diskCacheKey(imageUrl)
                 .error(placeholderImage)
+                .decoderFactory(SvgDecoder.Factory())
                 .diskCachePolicy(CachePolicy.ENABLED)
                 .memoryCachePolicy(CachePolicy.ENABLED)
                 .build()
@@ -362,7 +368,7 @@ fun Retry(
             colors = ButtonDefaults.buttonColors(containerColor = Red)
         ) {
             Text(
-                text = "Retry",
+                text = stringResource(R.string.retry),
                 color = MaterialTheme.colorScheme.secondary,
             )
         }

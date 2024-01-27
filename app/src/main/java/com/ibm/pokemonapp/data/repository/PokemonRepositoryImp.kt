@@ -1,5 +1,7 @@
 package com.ibm.pokemonapp.data.repository
 
+import android.content.res.Resources
+import com.ibm.pokemonapp.R
 import com.ibm.pokemonapp.data.source.network.api.ApiService
 import com.ibm.pokemonapp.data.source.network.response.NetworkResponse
 import com.ibm.pokemonapp.data.source.network.response.PokemonListResponse
@@ -19,7 +21,7 @@ class PokemonRepositoryImp @Inject constructor(private var apiService: ApiServic
                 }
 
                 is NetworkResponse.ApiError -> {
-                    Resource.Error(response.code, "Failed to fetch Pokémon list")
+                    Resource.Error(response.code, "Failed to fetch Pokémon list") // TODO
                 }
 
                 is NetworkResponse.NetworkError -> {

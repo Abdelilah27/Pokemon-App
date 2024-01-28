@@ -58,7 +58,7 @@ fun OnBoardingScreen(navController: NavController) {
 
             // Pokemon App image
             Image(
-                painter = painterResource(id = R.drawable.pokmon_one),
+                painter = painterResource(id = R.drawable.onboarding_avatar),
                 contentDescription = "Pokemon OnBoarding Image",
                 modifier = Modifier
                     .fillMaxWidth()

@@ -71,6 +71,7 @@ dependencies {
     val coilVersion = "2.5.0"
     val paletteVersion = "1.0.0"
     val mockkVersion = "1.12.3"
+    val splashScreenVersion = "1.0.1"
 
     implementation("androidx.core:core-ktx:$coreKtxVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
@@ -121,6 +122,8 @@ dependencies {
     implementation("androidx.palette:palette-ktx:$paletteVersion") // TODO
 
     testImplementation("io.mockk:mockk:${mockkVersion}")
+
+    implementation ("androidx.core:core-splashscreen:$splashScreenVersion")
 
 }
 

@@ -240,7 +240,8 @@ fun PokemonList(
         if (isLoading) {
             CircularProgressIndicator(
                 color = MaterialTheme.colorScheme.secondary,
-                modifier = Modifier.align(Center)
+                modifier = Modifier
+                    .align(Center)
             )
         }
 

@@ -10,17 +10,21 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Search
@@ -46,6 +50,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -56,6 +61,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -69,17 +75,21 @@ import com.ibm.pokemonapp.data.models.PokemonListEntry
 import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
 import com.ibm.pokemonapp.presentation.ui.theme.RobotoCondensed
+import kotlin.math.roundToInt
 
 
 @Composable
 fun PokemonListScreen(
     navController: NavController
 ) {
+    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     Surface(
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.fillMaxSize() // TODO
     ) {
-        Column {
+        Column(
+            modifier = Modifier.verticalScroll(state = rememberScrollState())
+        ) {
             Spacer(modifier = Modifier.height(20.dp))
             TopBar(
                 imageModifier = Modifier.align(CenterHorizontally),
@@ -93,7 +103,7 @@ fun PokemonListScreen(
                 hint = stringResource(R.string.search_hint),
             )
 
-            PokemonList(navController)
+            PokemonList(navController, screenHeight)
         }
 
     }
@@ -198,6 +208,7 @@ fun SearchBar(
 @Composable
 fun PokemonList(
     navController: NavController,
+    screenHeight: Dp,
     viewModel: PokemonListViewModel = hiltViewModel()
 ) {
     val pokemonList by remember { viewModel.pokemonList } // TODO
@@ -206,6 +217,7 @@ fun PokemonList(
     val workflowError by remember { viewModel.workflowError }
 
     LazyVerticalGrid(
+        modifier = Modifier.height(screenHeight),
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),

@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -35,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -55,7 +58,6 @@ import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
 import com.ibm.pokemonapp.utils.Consts.DREAM_WORLD_IMAGES_URL
 import com.ibm.pokemonapp.utils.InfoPair
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 
 @Composable
@@ -76,6 +78,7 @@ fun PokemonDetailsScreen(
     Column(
         modifier = Modifier
             .background(pokemonColor)
+            .verticalScroll(state = rememberScrollState())
     )
     {
         TopBar(navController = navController)
@@ -166,10 +169,12 @@ fun PokemonTypesRow(pokemonDetails: PokemonResponse) {
     ) {
         Box(
             modifier = Modifier
+                .shadow(5.dp, RoundedCornerShape(8.dp))
                 .background(
                     MaterialTheme.colorScheme.primary,
                     RoundedCornerShape(8.dp)
                 )
+
         ) {
             Text(
                 text = pokemonDetails.types.getOrNull(0)?.type?.name ?: "N/A",
@@ -184,6 +189,7 @@ fun PokemonTypesRow(pokemonDetails: PokemonResponse) {
         Spacer(modifier = Modifier.width(16.dp))
         Box(
             modifier = Modifier
+                .shadow(5.dp, RoundedCornerShape(8.dp))
                 .background(
                     MaterialTheme.colorScheme.primary,
                     RoundedCornerShape(8.dp)
@@ -312,10 +318,12 @@ fun PokemonInfoPair(infoPair: InfoPair, modifier: Modifier) {
         }
         Box(
             modifier = Modifier
+                .shadow(5.dp, RoundedCornerShape(8.dp))
                 .background(
                     MaterialTheme.colorScheme.primary,
                     RoundedCornerShape(8.dp)
                 )
+
                 .fillMaxWidth()
         ) {
             Text(

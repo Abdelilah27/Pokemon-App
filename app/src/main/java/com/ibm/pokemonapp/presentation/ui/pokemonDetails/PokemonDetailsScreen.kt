@@ -22,6 +22,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -33,6 +35,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,7 +62,9 @@ import com.ibm.pokemonapp.domain.model.Resource
 import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
 import com.ibm.pokemonapp.utils.InfoPair
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 @Composable
 fun PokemonDetailsScreen(
@@ -68,13 +73,17 @@ fun PokemonDetailsScreen(
     pokemonName: String?,
     viewModel: PokemonDetailsViewModel = hiltViewModel()
 ) {
+    var refreshState by remember { mutableStateOf(0) }
     val pokemonDetails by produceState(
         initialValue = Resource.Loading(),
         key1 = viewModel,
-        key2 = pokemonName
+        key2 = pokemonName,
+        key3 = refreshState
     ) {
         value = pokemonName?.let { viewModel.getPokemonDetails(it.toLowerCase()).first() }!!
     }
+
+
     Column(
         modifier = Modifier
             .background(pokemonColor)
@@ -86,19 +95,26 @@ fun PokemonDetailsScreen(
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            PokemonDetailState(
-                viewModel = viewModel,
-                pokemonDetails = pokemonDetails,
-                imageModifier = Modifier
-                    .size(200.dp)
-                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                modifier = Modifier.fillMaxWidth(),
-                loadingModifier = Modifier
-                    .size(64.dp)
-                    .padding(16.dp)
-                    .align(Alignment.Center),
-                textModifier = Modifier.align(Alignment.Center)
-            )
+            pokemonName?.let { name ->
+                PokemonDetailState(
+                    pokemonName = name,
+                    viewModel = viewModel,
+                    pokemonDetails = pokemonDetails,
+                    modifier = Modifier.fillMaxWidth(),
+                    imageModifier = Modifier
+                        .size(200.dp)
+                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    loadingModifier = Modifier
+                        .size(64.dp)
+                        .padding(16.dp)
+                        .align(Alignment.Center),
+                    retryModifier = Modifier.align(Alignment.Center),
+                    onRetry = {
+                        // Increment the refreshState to trigger a UI update
+                        refreshState++
+                    },
+                )
+            }
         }
     }
 }
@@ -388,12 +404,14 @@ fun StatesProgressBar(
 
 @Composable
 fun PokemonDetailState(
+    pokemonName: String,
     viewModel: PokemonDetailsViewModel,
     pokemonDetails: Resource<PokemonResponse>,
     modifier: Modifier = Modifier,
     imageModifier: Modifier = Modifier,
     loadingModifier: Modifier = Modifier,
-    textModifier: Modifier = Modifier,
+    retryModifier: Modifier,
+    onRetry: () -> Unit,
 ) {
     when (pokemonDetails) {
         is Resource.Success -> {
@@ -417,17 +435,43 @@ fun PokemonDetailState(
         }
 
         is Resource.Error -> {
-            Text(
-                text = pokemonDetails.message!!,
-                color = Red,
-                modifier = textModifier
-            )
+            val coroutineScope = rememberCoroutineScope()
+            Retry(error = pokemonDetails.message.toString(), onRetry = onRetry, retryModifier) {
+                coroutineScope.launch {
+                    viewModel.getPokemonDetails(pokemonName.toLowerCase())
+                }
+            }
         }
 
         is Resource.Loading -> {
             CircularProgressIndicator(
                 color = MaterialTheme.colorScheme.primary,
                 modifier = loadingModifier
+            )
+        }
+    }
+}
+
+@Composable
+fun Retry(
+    error: String,
+    onRetry: () -> Unit,
+    retryModifier: Modifier,
+    function: () -> Job
+) {
+    Column(modifier = retryModifier) {
+        Text(error, color = Red, fontSize = 18.sp)
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(
+            onClick = { onRetry() },
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .background(Red, RoundedCornerShape(8.dp)),
+            colors = ButtonDefaults.buttonColors(containerColor = Red)
+        ) {
+            Text(
+                text = stringResource(R.string.retry),
+                color = MaterialTheme.colorScheme.secondary,
             )
         }
     }

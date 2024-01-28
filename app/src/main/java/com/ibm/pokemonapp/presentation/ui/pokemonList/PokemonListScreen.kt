@@ -213,35 +213,43 @@ fun PokemonList(
     val isLoading by remember { viewModel.isLoading }
     val workflowError by remember { viewModel.workflowError }
 
-    LazyVerticalGrid(
-        modifier = Modifier.height(screenHeight),
-        columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
-        items(pokemonList.size) { pokemon ->
-            PokemonEntry(
-                entry = pokemonList[pokemon],
-                navController = navController
-            )
-            if (pokemon >= pokemonList.size - 1 && !isEndReached && !isLoading) { // Check if we're at the bottom
-                viewModel.getPokemonList()
-            }
-        }
-    }
-
     Box(
-        contentAlignment = Center,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.TopCenter,
     ) {
-        if (isLoading) {
-            CircularProgressIndicator(color = MaterialTheme.colorScheme.secondary)
-        }
-        if (workflowError.message.isNotEmpty()) {
-            Retry(error = workflowError.message) {
-                viewModel.getPokemonList()
+        LazyVerticalGrid(
+            modifier = Modifier.height(screenHeight),
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            items(pokemonList.size) { pokemon ->
+                PokemonEntry(
+                    entry = pokemonList[pokemon],
+                    navController = navController
+                )
+                if (pokemon >= pokemonList.size - 1 && !isEndReached && !isLoading) {
+                    viewModel.getPokemonList()
+                }
             }
+        }
+
+        // Loading indicator
+        if (isLoading) {
+            CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier.align(Center)
+            )
+        }
+
+        // Retry option
+        if (workflowError.message.isNotEmpty()) {
+            Retry(
+                error = workflowError.message,
+                onRetry = { viewModel.getPokemonList() },
+            )
         }
     }
 }

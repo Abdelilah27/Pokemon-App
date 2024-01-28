@@ -13,11 +13,10 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -70,7 +69,6 @@ import com.ibm.pokemonapp.data.models.PokemonListEntry
 import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
 import com.ibm.pokemonapp.presentation.ui.theme.RobotoCondensed
-import com.ibm.pokemonapp.utils.UIText
 
 
 @Composable
@@ -83,30 +81,9 @@ fun PokemonListScreen(
     ) {
         Column {
             Spacer(modifier = Modifier.height(20.dp))
-            Image(
-                painter = painterResource(id = R.drawable.ic_pokemon_logo),
-                contentDescription = "Pokemon logo",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(CenterHorizontally)
-            )
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(stringResource(R.string.welcome_title))
-                    }
-                    append("\n")
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(stringResource(R.string.welcome_title_))
-                    }
-                },
-                fontFamily = Roboto,
-                fontWeight = FontWeight.Black,
-                fontSize = 32.sp,
-                color = MaterialTheme.colorScheme.secondary,
-                modifier = Modifier
-                    .padding(16.dp)
-                    .align(Alignment.Start)
+            TopBar(
+                imageModifier = Modifier.align(CenterHorizontally),
+                textModifier = Modifier.align(Alignment.Start)
             )
 
             SearchBar(
@@ -116,13 +93,37 @@ fun PokemonListScreen(
                 hint = stringResource(R.string.search_hint),
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
-
             PokemonList(navController)
-
         }
 
     }
+}
+
+@Composable
+private fun TopBar(imageModifier: Modifier, textModifier: Modifier) {
+    Image(
+        painter = painterResource(id = R.drawable.ic_pokemon_logo),
+        contentDescription = "Pokemon logo",
+        modifier = imageModifier
+            .fillMaxWidth()
+    )
+    Text(
+        text = buildAnnotatedString {
+            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                append(stringResource(R.string.welcome_title))
+            }
+            append("\n")
+            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                append(stringResource(R.string.welcome_title_))
+            }
+        },
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Black,
+        fontSize = 32.sp,
+        color = MaterialTheme.colorScheme.secondary,
+        modifier = textModifier
+            .padding(16.dp)
+    )
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -204,25 +205,23 @@ fun PokemonList(
     val isLoading by remember { viewModel.isLoading }
     val workflowError by remember { viewModel.workflowError }
 
-
-    LazyColumn(contentPadding = PaddingValues(16.dp)) {
-        // TODO
-        val itemCount = if (pokemonList.size % 2 == 0) {
-            pokemonList.size / 2
-        } else {
-            pokemonList.size / 2 + 1 // 14.2
-        }
-        items(itemCount) { currentIndex ->
-            if (currentIndex >= itemCount - 1 && !isEndReached && !isLoading) { // Check if we're at the bottom
-                viewModel.getPokemonList()
-            }
-            PokemonRow(
-                index = currentIndex,
-                pokemonListEntry = pokemonList,
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        items(pokemonList.size) { pokemon ->
+            PokemonEntry(
+                entry = pokemonList[pokemon],
                 navController = navController
             )
+            if (pokemon >= pokemonList.size - 1 && !isEndReached && !isLoading) { // Check if we're at the bottom
+                viewModel.getPokemonList()
+            }
         }
     }
+
     Box(
         contentAlignment = Center,
         modifier = Modifier.fillMaxSize()
@@ -230,7 +229,7 @@ fun PokemonList(
         if (isLoading) {
             CircularProgressIndicator(color = MaterialTheme.colorScheme.secondary)
         }
-        if (workflowError.message.isNotEmpty() ) {
+        if (workflowError.message.isNotEmpty()) {
             Retry(error = workflowError.message) {
                 viewModel.getPokemonList()
             }
@@ -240,7 +239,7 @@ fun PokemonList(
 
 
 @Composable
-fun PokemonListEntry(
+fun PokemonEntry(
     entry: PokemonListEntry,
     navController: NavController,
     modifier: Modifier = Modifier,
@@ -317,37 +316,6 @@ fun PokemonListEntry(
         }
     }
 }
-
-// TODO
-@Composable
-fun PokemonRow(
-    index: Int,
-    pokemonListEntry: List<PokemonListEntry>,
-    navController: NavController
-) {
-    Column {
-        Row {
-            PokemonListEntry(
-                entry = pokemonListEntry[index * 2],
-                navController = navController,
-                modifier = Modifier.weight(1f)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            val currentRow = index * 2
-            if (pokemonListEntry.size >= currentRow + 2) {
-                PokemonListEntry(
-                    entry = pokemonListEntry[currentRow + 1],
-                    navController = navController,
-                    modifier = Modifier.weight(1f)
-                )
-            } else {
-                Spacer(modifier = Modifier.weight(1f))
-            }
-        }
-        Spacer(modifier = Modifier.heightIn(16.dp))
-    }
-}
-
 
 @Composable
 fun Retry(

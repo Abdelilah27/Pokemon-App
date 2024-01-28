@@ -52,6 +52,14 @@ This Android application is a showcase of modern Android development practices a
 
 https://github.com/Abdelilah27/Pokemon-App/assets/71185753/4d213d1b-582b-4be1-85ba-2cea27de945c
 
+## Design
+
+Design influenced by: 
+- https://dribbble.com/shots/20557553-Pokedex-Pokemon-App-v2/attachments/15589797?mode=media
+- https://dribbble.com/shots/14500564-Pokedex
+- https://dribbble.com/shots/22315114-Pok-dex-App-Concept-Free-Figma-File
+- https://dribbble.com/shots/6540871-Pokedex-App
+
 **Note:** All commits in this repository are made using the company account "abdelilah.ngadi@idemia.com."
 
 Thank You. To Success!

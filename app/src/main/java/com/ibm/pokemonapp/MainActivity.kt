@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.ibm.pokemonapp.presentation.ui.onBoarding.OnBoardingScreen
 import com.ibm.pokemonapp.presentation.ui.pokemonDetails.PokemonDetailsScreen
 import com.ibm.pokemonapp.presentation.ui.pokemonList.PokemonListScreen
 import com.ibm.pokemonapp.presentation.ui.theme.PokemonAppTheme
@@ -23,7 +24,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             PokemonAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "pokemon_list_screen") {
+                NavHost(navController = navController, startDestination = "onboarding_screen") {
+                    composable("onboarding_screen") {
+                        OnBoardingScreen(navController = navController)
+                    }
                     composable("pokemon_list_screen") {
                         PokemonListScreen(navController = navController)
                     }
@@ -43,7 +47,11 @@ class MainActivity : ComponentActivity() {
                         val pokemonName = remember {
                             it.arguments?.getString("pokemonName")
                         }
-                        PokemonDetailsScreen(navController = navController, pokemonColor, pokemonName)
+                        PokemonDetailsScreen(
+                            navController = navController,
+                            pokemonColor,
+                            pokemonName
+                        )
                     }
                 }
             }

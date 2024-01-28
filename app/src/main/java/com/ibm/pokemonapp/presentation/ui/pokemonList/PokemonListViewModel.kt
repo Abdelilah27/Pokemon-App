@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
+import com.ibm.pokemonapp.BuildConfig
 import com.ibm.pokemonapp.data.models.PokemonListEntry
 import com.ibm.pokemonapp.data.source.network.response.PokemonListResponse
 import com.ibm.pokemonapp.data.source.network.response.Response
@@ -93,7 +94,7 @@ class PokemonListViewModel @Inject constructor(
                 entry.url.takeLastWhile { it.isDigit() }
             }
             val url =
-                "$DREAM_WORLD_IMAGES_URL${number}.svg"
+                BuildConfig.DREAM_WORLD_IMAGES_URL + "/${number}.svg"
             PokemonListEntry(
                 entry.name.capitalize(Locale.ROOT),
                 url,

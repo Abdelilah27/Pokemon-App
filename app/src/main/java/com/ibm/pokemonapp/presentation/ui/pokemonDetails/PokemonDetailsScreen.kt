@@ -51,6 +51,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.SvgDecoder
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import com.ibm.pokemonapp.BuildConfig
 import com.ibm.pokemonapp.R
 import com.ibm.pokemonapp.data.source.network.response.PokemonResponse
 import com.ibm.pokemonapp.domain.model.Resource
@@ -210,7 +211,7 @@ fun PokemonTypesRow(pokemonDetails: PokemonResponse) {
 
 @Composable
 fun PokemonImage(pokemonDetails: PokemonResponse, modifier: Modifier) {
-    val imageUrl = "$DREAM_WORLD_IMAGES_URL${pokemonDetails.id}.svg"
+    val imageUrl = BuildConfig.DREAM_WORLD_IMAGES_URL + "/${pokemonDetails.id}.svg"
     val placeholderImage = R.drawable.ic_pokemon_logo
     val imageRequest = ImageRequest.Builder(LocalContext.current)
         .data(imageUrl)

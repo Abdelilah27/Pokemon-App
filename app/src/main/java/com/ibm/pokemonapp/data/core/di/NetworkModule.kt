@@ -1,6 +1,7 @@
 package com.ibm.pokemonapp.data.core.di
 
 import com.google.gson.GsonBuilder
+import com.ibm.pokemonapp.BuildConfig
 import com.ibm.pokemonapp.data.source.network.api.ApiService
 import com.ibm.pokemonapp.utils.Consts
 import com.ibm.pokemonapp.data.core.adapter.NetworkResponseAdapterFactory
@@ -92,7 +93,7 @@ class NetworkModule {
         converterFactory: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Consts.BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(converterFactory)

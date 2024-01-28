@@ -82,7 +82,7 @@ fun PokemonListScreen(
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     Surface(
         color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.fillMaxSize() // TODO
+        modifier = Modifier.fillMaxSize()
     ) {
         Column(
             modifier = Modifier.verticalScroll(state = rememberScrollState())
@@ -100,6 +100,7 @@ fun PokemonListScreen(
                 hint = stringResource(R.string.search_hint),
             )
 
+            // Grid Section
             PokemonList(navController, screenHeight)
         }
 
@@ -133,6 +134,8 @@ private fun TopBar(imageModifier: Modifier, textModifier: Modifier) {
     )
 }
 
+
+// TODO
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchBar(
@@ -140,7 +143,7 @@ fun SearchBar(
     hint: String = "",
     onSearch: (String) -> Unit = {}
 ) {
-    // TODO
+    // The current search query in the PokemonListScreen
     var query by remember {
         mutableStateOf("")
     }
@@ -160,15 +163,15 @@ fun SearchBar(
             },
             maxLines = 1,
             singleLine = true,
-            textStyle = TextStyle(color = MaterialTheme.colorScheme.secondary), // TODO
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.secondary),
             modifier = Modifier
                 .fillMaxWidth()
                 .shadow(5.dp, RoundedCornerShape(8.dp))
                 .background(MaterialTheme.colorScheme.tertiary, RoundedCornerShape(8.dp))
-                .padding(horizontal = 20.dp, vertical = 12.dp) // TODO
+                .padding(horizontal = 20.dp, vertical = 12.dp)
                 .onFocusChanged {
                     if (it.isFocused) {
-                        keyboardController?.show() // TODO
+                        keyboardController?.show()
                     }
                 },
             keyboardOptions = KeyboardOptions(
@@ -208,7 +211,7 @@ fun PokemonList(
     screenHeight: Dp,
     viewModel: PokemonListViewModel = hiltViewModel()
 ) {
-    val pokemonList by remember { viewModel.pokemonList } // TODO
+    val pokemonList by remember { viewModel.pokemonList }
     val isEndReached by remember { viewModel.isEndReached }
     val isLoading by remember { viewModel.isLoading }
     val workflowError by remember { viewModel.workflowError }
@@ -218,6 +221,7 @@ fun PokemonList(
             .fillMaxSize(),
         contentAlignment = Alignment.TopCenter,
     ) {
+        // Display the Pokemon entries
         LazyVerticalGrid(
             modifier = Modifier.height(screenHeight),
             columns = GridCells.Fixed(2),
@@ -225,12 +229,12 @@ fun PokemonList(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            items(pokemonList.size) { pokemon ->
+            items(pokemonList.size) { index ->
                 PokemonEntry(
-                    entry = pokemonList[pokemon],
+                    entry = pokemonList[index],
                     navController = navController
                 )
-                if (pokemon >= pokemonList.size - 1 && !isEndReached && !isLoading) {
+                if (index >= pokemonList.size - 1 && !isEndReached && !isLoading) {
                     viewModel.getPokemonList()
                 }
             }
@@ -273,7 +277,7 @@ fun PokemonEntry(
         modifier = modifier
             .shadow(5.dp, RoundedCornerShape(8.dp))
             .clip(RoundedCornerShape(8.dp))
-            .aspectRatio(1f) // TODO
+            .aspectRatio(1f) // Making it a square
             .background(pokemonColor)
             .clickable {
                 navController.navigate(

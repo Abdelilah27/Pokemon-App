@@ -1,5 +1,5 @@
 import com.ibm.pokemonapp.data.source.network.response.NetworkResponse
-import com.ibm.pokemonapp.data.source.network.response.NetworkResponseCall
+import com.ibm.pokemonapp.data.core.adapter.NetworkResponseCall
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.CallAdapter

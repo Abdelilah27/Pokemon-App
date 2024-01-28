@@ -11,8 +11,8 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("pokemon")
     suspend fun getPokemonList(
-        @Query("limit") limit: Int, // TODO
-        @Query("offset") offset: Int // TODO
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
     ): NetworkResponse<PokemonListResponse, Response.ErrorResponse>
 
     @GET("pokemon/{pokemonName}")

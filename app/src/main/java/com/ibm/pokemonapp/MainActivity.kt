@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Configuration code for installing a splash screen with no conditions
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 false

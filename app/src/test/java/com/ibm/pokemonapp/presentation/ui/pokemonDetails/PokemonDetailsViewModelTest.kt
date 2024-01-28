@@ -93,6 +93,7 @@ class PokemonDetailsViewModelTest {
         result?.let { assertEquals(0.23529412f, it) }
     }
 
+    // Helper Function: to create a mock PokemonResponse for testing purposes
     private fun createMockPokemonResponse(): PokemonResponse {
         return PokemonResponse(
             base_experience = 100,

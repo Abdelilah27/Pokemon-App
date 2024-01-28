@@ -21,7 +21,11 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "BASE_URL", "\"https://pokeapi.co/api/v2/\"")
-        buildConfigField("String", "DREAM_WORLD_IMAGES_URL", "\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/\"")
+        buildConfigField(
+            "String",
+            "DREAM_WORLD_IMAGES_URL",
+            "\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/\""
+        )
     }
 
     buildTypes {
@@ -94,7 +98,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
-    implementation("com.squareup.retrofit2:converter-scalars:${retrofitVersion}") // TODO
+    implementation("com.squareup.retrofit2:converter-scalars:${retrofitVersion}")
 
     // Timber
     implementation("com.jakewharton.timber:timber:$timberVersion")
@@ -108,22 +112,25 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesVersion}")
 
-
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
     kapt("com.google.dagger:hilt-compiler:2.50")
     kapt("androidx.hilt:hilt-compiler:$hiltNavigationComposeVersion")
     implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
 
-    // Coil // TODO
+    // Coil
     implementation("io.coil-kt:coil-compose:$coilVersion")
     implementation("io.coil-kt:coil-svg:$coilVersion")
 
-    implementation("androidx.palette:palette-ktx:$paletteVersion") // TODO
+    // To extract prominent colors from images.
+    implementation("androidx.palette:palette-ktx:$paletteVersion")
 
+    // Mock
     testImplementation("io.mockk:mockk:${mockkVersion}")
 
-    implementation ("androidx.core:core-splashscreen:$splashScreenVersion")
+    // Google Splash Screen
+    implementation("androidx.core:core-splashscreen:$splashScreenVersion")
+
 
 }
 

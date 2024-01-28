@@ -14,9 +14,13 @@ class PokemonDetailsViewModel @Inject constructor(
     private val getPokemonDetailsUseCase: GetPokemonDetailsUseCase,
 ) :
     ViewModel() {
+
+    // Fetch Pokemon details and return as a Flow
     suspend fun getPokemonDetails(pokemonName: String): Flow<Resource<PokemonResponse>> =
         getPokemonDetailsUseCase(pokemonName)
 
+
+    // Calculate and return the global state percentage based on Pokemon stats
     fun calculateGlobalState(stats: List<Stat>): Float {
         try {
             val totalStats = stats.sumOf { it.base_stat }

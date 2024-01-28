@@ -45,10 +45,11 @@ class PokemonListViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 isLoading.value = true
+                // Provide appropriate values for your use case
                 val param = Pair(
-                    PAGE_SIZE, // 20
-                    PAGE_SIZE * currentPage   // 20 * 1
-                ) // Provide appropriate values for your use case // TODO
+                    PAGE_SIZE, // Number of Pokemon to fetch per call
+                    PAGE_SIZE * currentPage   // Offset for pagination
+                )
                 getPokemonListUseCase.invoke(param).collect { result ->
                     when (result) {
                         is Resource.Success -> {
@@ -78,13 +79,14 @@ class PokemonListViewModel @Inject constructor(
                 isLoading.value = false
                 workflowError.value =
                     Response.ErrorResponse(
-                        message = "An error occurred",// TODO
+                        message = "An error occurred",
                         id = 999
                     )
             }
         }
     }
 
+    // To create Pokemon list entries from API response
     private fun createPokemonListEntries(data: PokemonListResponse): List<PokemonListEntry> {
         val pokemonListEntry = data.results.mapIndexed { index, entry ->
             val number = if (entry.url.endsWith("/")) {
@@ -111,6 +113,7 @@ class PokemonListViewModel @Inject constructor(
         )
     }
 
+    // To generate a dominant color from a Pokemon image
     fun generatePokemonColor(drawable: Drawable, onFinish: (Color) -> Unit) {
         val bitmap = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
         Palette.from(bitmap).generate { palette ->

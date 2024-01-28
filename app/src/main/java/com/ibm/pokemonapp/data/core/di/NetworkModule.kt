@@ -27,7 +27,6 @@ import javax.net.ssl.X509TrustManager
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
-    // TODO
     @Provides
     fun providesOkHttpClientBuilder(): OkHttpClient.Builder = OkHttpClient.Builder()
 
@@ -47,7 +46,7 @@ class NetworkModule {
     ): OkHttpClient {
         okHttpClientBuilder.addInterceptor(httpLoggingInterceptor)
         val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
-            object : X509TrustManager {
+            object : X509TrustManager { //  To trust all certificates without any validation
                 override fun checkClientTrusted(
                     chain: Array<X509Certificate?>?,
                     authType: String?
@@ -94,6 +93,8 @@ class NetworkModule {
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
+            // Use a custom way of handling server responses, allowing consistent handling of success and error scenarios in the app
+            // It logs information about the response
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(converterFactory)

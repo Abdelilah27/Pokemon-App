@@ -65,6 +65,7 @@ import com.ibm.pokemonapp.utils.InfoPair
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @Composable
 fun PokemonDetailsScreen(
@@ -73,17 +74,19 @@ fun PokemonDetailsScreen(
     pokemonName: String?,
     viewModel: PokemonDetailsViewModel = hiltViewModel()
 ) {
+    // Increment the refreshState to trigger a UI update when the user clicks the "Retry" button
     var refreshState by remember { mutableStateOf(0) }
+
+    // The `pokemonDetails` state is updated using produceState, with dependencies on viewModel, pokemonName, and refreshState
     val pokemonDetails by produceState(
         initialValue = Resource.Loading(),
         key1 = viewModel,
         key2 = pokemonName,
         key3 = refreshState
     ) {
-        value = pokemonName?.let { viewModel.getPokemonDetails(it.toLowerCase()).first() }!!
+        value =
+            pokemonName?.let { viewModel.getPokemonDetails(it.lowercase(Locale.ROOT)).first() }!!
     }
-
-
     Column(
         modifier = Modifier
             .background(pokemonColor)
@@ -91,7 +94,10 @@ fun PokemonDetailsScreen(
             .verticalScroll(state = rememberScrollState())
     )
     {
+        // TopBar Section
         TopBar(navController = navController)
+
+        // To Display the Pokemon details based on the current state
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -243,6 +249,7 @@ fun PokemonImage(pokemonDetails: PokemonResponse, modifier: Modifier) {
         modifier = modifier,
         contentDescription = "Pokemon Image",
         loading = {
+            // Loading indicator while the image is being fetched
             CircularProgressIndicator(
                 color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.scale(0.5f)
@@ -263,6 +270,7 @@ fun Divider() {
     )
 }
 
+// Display the Pokemon skills data including weight, height, category, and skills
 @Composable
 private fun PokemonSkillsData(
     modifier: Modifier,
@@ -297,6 +305,7 @@ private fun PokemonSkillsData(
     )
 }
 
+// Row to display two sets of information side by side
 @Composable
 fun PokemonInfoRow(infoPair: InfoPair, infoPair_: InfoPair, modifier: Modifier) {
     Row(
@@ -357,6 +366,7 @@ fun PokemonInfoPair(infoPair: InfoPair, modifier: Modifier) {
     }
 }
 
+// Display an animated progress bar with the specified global state percentage
 @Composable
 fun StatesProgressBar(
     globalState: Float
@@ -435,10 +445,11 @@ fun PokemonDetailState(
         }
 
         is Resource.Error -> {
+            // Display a Retry composable with the error message and retry callback
             val coroutineScope = rememberCoroutineScope()
             Retry(error = pokemonDetails.message.toString(), onRetry = onRetry, retryModifier) {
                 coroutineScope.launch {
-                    viewModel.getPokemonDetails(pokemonName.toLowerCase())
+                    viewModel.getPokemonDetails(pokemonName.lowercase(Locale.ROOT))
                 }
             }
         }

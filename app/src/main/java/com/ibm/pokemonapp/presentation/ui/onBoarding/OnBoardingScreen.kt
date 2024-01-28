@@ -40,7 +40,7 @@ fun OnBoardingScreen(navController: NavController) {
         ) {
             Spacer(modifier = Modifier.weight(0.3f))
 
-            // Welcome To text
+            // Welcome texts
             Text(
                 text = stringResource(R.string.welcome_to),
                 fontFamily = Roboto,

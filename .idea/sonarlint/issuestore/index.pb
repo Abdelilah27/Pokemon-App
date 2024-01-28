@@ -26,10 +26,6 @@ C
 gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
 F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
-Ñ
-Tapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/NetworkResponse.kt,8/a/8a8006ca410166b87fd4cec30eeb0365235dac57
-à
-Xapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/NetworkResponseCall.kt,b/4/b40c2e06b0c29965b6bcc5cc686d17e2e5fd57e7
 É
 Sapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Animated.kt,2/0/20feedf07a1b1976d7589b557747553ca5a5e1cc
 Ö
@@ -120,7 +116,3 @@ Sapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Version
 Mapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/XY.kt,1/6/161e498562883803466f21fb22abb45140e56052
 Å
 Qapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Yellow.kt,2/0/202222de5b169223b9895a2148dc04e4dff02e7b
-Ä
-Papp/src/main/java/com/ibm/pokemonapp/data/core/adapter/NetworkResponseAdapter.kt,e/f/ef15a7303bccede3edeedeaf9d81afe9ae95ff8c
-á
-Wapp/src/main/java/com/ibm/pokemonapp/data/core/adapter/NetworkResponseAdapterFactory.kt,4/a/4a8071af1f89f60fb70884c13508fc724dac8f9d

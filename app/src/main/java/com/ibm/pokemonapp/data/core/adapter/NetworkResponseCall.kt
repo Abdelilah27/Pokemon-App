@@ -1,5 +1,6 @@
-package com.ibm.pokemonapp.data.source.network.response
+package com.ibm.pokemonapp.data.core.adapter
 
+import com.ibm.pokemonapp.data.source.network.response.NetworkResponse
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.Timeout
@@ -9,6 +10,7 @@ import retrofit2.Converter
 import retrofit2.Response
 import java.io.IOException
 
+// Custom Retrofit Call implementation that wraps network responses
 internal class NetworkResponseCall<S : Any, E : Any>(
     private val delegate: Call<S>,
     private val errorConverter: Converter<ResponseBody, E>

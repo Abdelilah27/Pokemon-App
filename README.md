@@ -48,6 +48,10 @@ This Android application is a showcase of modern Android development practices a
 - **Details Lists States Management:** Resolved by using `produceState` to manage states such as success, loading, and failure effectively.
 - **Nested Scrolling Column and LazyVerticalGrid:** Resolved by adjusting the screen height to the `LazyVerticalGrid` to prevent infinite height problems.
 
+## Demo
+
+https://github.com/Abdelilah27/Pokemon-App/assets/71185753/4d213d1b-582b-4be1-85ba-2cea27de945c
+
 **Note:** All commits in this repository are made using the company account "abdelilah.ngadi@idemia.com."
 
 Thank You. To Success!

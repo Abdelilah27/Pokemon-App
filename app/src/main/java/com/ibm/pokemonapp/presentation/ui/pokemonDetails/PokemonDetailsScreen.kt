@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -57,7 +58,6 @@ import com.ibm.pokemonapp.data.source.network.response.PokemonResponse
 import com.ibm.pokemonapp.domain.model.Resource
 import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
-import com.ibm.pokemonapp.utils.Consts.DREAM_WORLD_IMAGES_URL
 import com.ibm.pokemonapp.utils.InfoPair
 import kotlinx.coroutines.flow.first
 
@@ -68,7 +68,6 @@ fun PokemonDetailsScreen(
     pokemonName: String?,
     viewModel: PokemonDetailsViewModel = hiltViewModel()
 ) {
-
     val pokemonDetails by produceState(
         initialValue = Resource.Loading(),
         key1 = viewModel,
@@ -79,6 +78,7 @@ fun PokemonDetailsScreen(
     Column(
         modifier = Modifier
             .background(pokemonColor)
+            .fillMaxHeight()
             .verticalScroll(state = rememberScrollState())
     )
     {
@@ -178,7 +178,7 @@ fun PokemonTypesRow(pokemonDetails: PokemonResponse) {
 
         ) {
             Text(
-                text = pokemonDetails.types.getOrNull(0)?.type?.name ?: "N/A",
+                text = pokemonDetails.types?.getOrNull(0)?.type?.name ?: "N/A",
                 fontFamily = Roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
@@ -197,7 +197,7 @@ fun PokemonTypesRow(pokemonDetails: PokemonResponse) {
                 )
         ) {
             Text(
-                text = pokemonDetails.types.getOrNull(1)?.type?.name ?: "N/A",
+                text = pokemonDetails.types?.getOrNull(1)?.type?.name ?: "N/A",
                 fontFamily = Roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
@@ -270,12 +270,12 @@ private fun PokemonSkillsData(
         InfoPair(
             iconRes = R.drawable.baseline_category_24,
             titleRes = R.string.category,
-            value = pokemonDetails.abilities.getOrNull(0)?.ability?.name ?: "N/A",
+            value = pokemonDetails.abilities?.getOrNull(0)?.ability?.name ?: "N/A",
         ),
         InfoPair(
             iconRes = R.drawable.baseline_catching_pokemon_24,
             titleRes = R.string.skills,
-            value = pokemonDetails.abilities.getOrNull(1)?.ability?.name ?: "N/A",
+            value = pokemonDetails.abilities?.getOrNull(1)?.ability?.name ?: "N/A",
         ),
         modifier = modifier
     )

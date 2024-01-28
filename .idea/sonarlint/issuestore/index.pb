@@ -104,10 +104,6 @@ Qapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Silver.
 Rapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Species.kt,e/a/ea58ab15aac3c67933cd39d61ccb7bd31a2db899
 ‚
 Rapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Sprites.kt,c/c/cc2d156a0189059dfb434a08220ee9a39318931d
-
-Oapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Stat.kt,7/a/7add85b107a196f78bf919f60a9f0fa9cb70b342
-€
-Papp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/StatX.kt,d/e/de0ea297f92180c347b6a0e18fe562ddf6feb282
 Œ
 \app/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/UltraSunUltraMoon.kt,0/c/0cfa92f517ed6501beeb9123ab9abafb7858d3c7
 ‚

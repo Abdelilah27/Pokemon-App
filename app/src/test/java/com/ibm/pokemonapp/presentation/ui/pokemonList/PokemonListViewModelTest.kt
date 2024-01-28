@@ -23,10 +23,6 @@ class PokemonListViewModelTest {
 
     private lateinit var viewModel: PokemonListViewModel
 
-    @Before
-    fun setup() {
-    }
-
     @Test
     fun `getPokemonList should update viewModel properties on success`() = runTest {
         // Arrange

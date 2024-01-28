@@ -11,23 +11,23 @@ import com.ibm.pokemonapp.data.source.network.response.model.Stat
 import com.ibm.pokemonapp.data.source.network.response.model.Type
 
 data class PokemonResponse(
-    val abilities: List<Ability>,
+    val abilities: List<Ability>? = listOf(),
     val base_experience: Int,
-    val forms: List<Form>,
-    val game_indices: List<GameIndice>,
+    val forms: List<Form>? = listOf(),
+    val game_indices: List<GameIndice>? = listOf(),
     val height: Int,
-    val held_items: List<HeldItem>,
+    val held_items: List<HeldItem>? = listOf(),
     val id: Int,
     val is_default: Boolean,
     val location_area_encounters: String,
-    val moves: List<Move>,
+    val moves: List<Move>? = listOf(),
     val name: String,
     val order: Int,
     val past_abilities: List<Any>,
     val past_types: List<Any>,
-    val species: Species,
-    val sprites: Sprites,
+    val species: Species? = null,
+    val sprites: Sprites? = null,
     val stats: List<Stat>,
-    val types: List<Type>,
+    val types: List<Type>? = listOf(),
     val weight: Int
 )

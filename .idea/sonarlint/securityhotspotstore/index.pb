@@ -32,8 +32,6 @@ Xapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/NetworkRespon
 Tapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/NetworkResponse.kt,8/a/8a8006ca410166b87fd4cec30eeb0365235dac57
 …
 Uapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/DreamWorld.kt,9/2/927f0c8b608a0613d2f3c27923d4a96caf6b5fec
-€
-Papp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/StatX.kt,d/e/de0ea297f92180c347b6a0e18fe562ddf6feb282
 †
 Vapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/GenerationV.kt,0/5/052e04ccc9dc57753d225314c365c9325207bd06
 ‡
@@ -100,8 +98,6 @@ Rapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Sprites
 Zapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/MoveLearnMethod.kt,2/f/2f64625cdf73687ff7ba911116c6e6f527f9af25
 ƒ
 Sapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Showdown.kt,e/a/ea4c5f3b4b91ff4146fe6d808f5bf28949428c93
-
-Oapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/Stat.kt,7/a/7add85b107a196f78bf919f60a9f0fa9cb70b342
 †
 Vapp/src/main/java/com/ibm/pokemonapp/data/source/network/response/model/GenerationI.kt,4/b/4b8944ed435abf8268e30b2befb65914f61c3101
 ‚

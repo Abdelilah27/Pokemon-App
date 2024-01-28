@@ -107,7 +107,7 @@ fun TopBar(navController: NavController) {
             tint = MaterialTheme.colorScheme.secondary,
             modifier = Modifier
                 .clickable {
-
+                    navController.popBackStack()
                 }
         )
         Icon(

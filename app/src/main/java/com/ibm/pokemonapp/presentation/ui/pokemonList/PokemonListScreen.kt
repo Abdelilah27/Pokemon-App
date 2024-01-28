@@ -230,7 +230,7 @@ fun PokemonList(
         if (isLoading) {
             CircularProgressIndicator(color = MaterialTheme.colorScheme.secondary)
         }
-        if (workflowError.message.isNotEmpty()) {
+        if (workflowError.message.isNotEmpty() ) {
             Retry(error = workflowError.message) {
                 viewModel.getPokemonList()
             }

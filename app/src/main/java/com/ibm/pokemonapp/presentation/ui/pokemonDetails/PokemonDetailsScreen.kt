@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -22,7 +21,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,7 +45,6 @@ import coil.request.ImageRequest
 import com.ibm.pokemonapp.R
 import com.ibm.pokemonapp.data.source.network.response.PokemonResponse
 import com.ibm.pokemonapp.domain.model.Resource
-import com.ibm.pokemonapp.presentation.ui.theme.Blue
 import com.ibm.pokemonapp.presentation.ui.theme.Red
 import com.ibm.pokemonapp.presentation.ui.theme.Roboto
 import com.ibm.pokemonapp.utils.Consts.DREAM_WORLD_IMAGES_URL
@@ -69,7 +66,6 @@ fun PokemonDetailsScreen(
     ) {
         value = pokemonName?.let { viewModel.getPokemonDetails(it.toLowerCase()).first() }!!
     }
-
     Column(
         modifier = Modifier
             .background(pokemonColor)
@@ -80,6 +76,7 @@ fun PokemonDetailsScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             PokemonDetailState(
+                viewModel = viewModel,
                 pokemonDetails = pokemonDetails,
                 imageModifier = Modifier
                     .size(200.dp)
@@ -329,8 +326,8 @@ fun PokemonInfoPair(infoPair: InfoPair, modifier: Modifier) {
 }
 
 @Composable
-fun GenderProgressBar(
-    pokemonDetails: PokemonResponse
+fun StatesProgressBar(
+    globalState: Float
 ) {
     Box(
         modifier = Modifier
@@ -338,9 +335,9 @@ fun GenderProgressBar(
             .padding(16.dp)
     ) {
         LinearProgressIndicator(
-            progress = 0.6f,
-            color = Blue,
-            trackColor = Red,
+            progress = globalState,
+            color = MaterialTheme.colorScheme.secondary,
+            trackColor = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(8.dp)
@@ -353,17 +350,10 @@ fun GenderProgressBar(
                 .padding(top = 16.dp)
         ) {
             Icon(
-                painter = painterResource(R.drawable.baseline_male_24),
-                contentDescription = "Male Percent",
+                painter = painterResource(R.drawable.baseline_percent_24),
+                contentDescription = "Global State",
                 tint = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier
-            )
-            Icon(
-                painter = painterResource(R.drawable.baseline_female_24),
-                contentDescription = "Female Percent",
-                tint = MaterialTheme.colorScheme.secondary,
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
             )
         }
     }
@@ -371,6 +361,7 @@ fun GenderProgressBar(
 
 @Composable
 fun PokemonDetailState(
+    viewModel: PokemonDetailsViewModel,
     pokemonDetails: Resource<PokemonResponse>,
     modifier: Modifier = Modifier,
     imageModifier: Modifier = Modifier,
@@ -393,7 +384,7 @@ fun PokemonDetailState(
                     )
                     Divider()
                     PokemonSkillsData(modifier = modifier.weight(1f), pokemonDetails = pokemon)
-                    GenderProgressBar(pokemon)
+                    StatesProgressBar(viewModel.calculateGlobalState(pokemon.stats))
                 }
             }
         }

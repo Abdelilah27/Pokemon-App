@@ -58,6 +58,10 @@ class PokemonListViewModel @Inject constructor(
                             val pokemonListEntry = createPokemonListEntries(result.data)
                             currentPage++
                             isLoading.value = false
+                            workflowError.value = Response.ErrorResponse(
+                                0,
+                                ""
+                            )
                             pokemonList.value += pokemonListEntry
                         }
 

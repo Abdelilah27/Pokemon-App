@@ -12,10 +12,6 @@ S
 app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
 v
 Fapp/src/androidTest/java/com/ibm/pokemonapp/ExampleInstrumentedTest.kt,d/f/df3df197fb0663b1be2df9718f5ad23be47311d8
-f
-6app/src/main/java/com/ibm/pokemonapp/ui/theme/Color.kt,4/1/41e8393e1405da00ade3eea86b36bf5d7655e278
-e
-5app/src/main/java/com/ibm/pokemonapp/ui/theme/Type.kt,d/5/d500dc0479a9df94ff5b3367dec1d83654f08dea
 g
 7app/src/test/java/com/ibm/pokemonapp/ExampleUnitTest.kt,a/6/a6e44742d3181826fb889213cdfc37052f93e4cb
 A
@@ -28,8 +24,6 @@ C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
 7
 gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
-f
-6app/src/main/java/com/ibm/pokemonapp/ui/theme/Theme.kt,1/3/13e70361aaf960742db1bec8ba5a1559a9144e3b
 F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
 „
